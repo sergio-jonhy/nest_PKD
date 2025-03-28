@@ -1,8 +1,32 @@
-html, body {
-    padding: 20px;
-    background-color: aliceblue;
+body {
+    background-image: url('../img/toyotaAE86.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
 h1 {
-    font-size: 20px;
-    color: aquamarine;
+    font-size: 3em;
+    color: beige;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+p {
+    font-size: 1.5em;
+    color: rgb(151, 151, 143);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
