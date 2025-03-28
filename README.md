@@ -56,3 +56,18 @@ http://localhost:3000/api/v2/seed
 ## Stack usado
 * MongoDB
 * Nest
+
+
+# Production Build
+1. Asegurarse de tener el archivo ```docker-compose.prod.yaml``` con la configuracion del servicio
+2. Asegurarse de tener el archivo ```Dockerfile``` con la configuracion de docker
+3. Crear el archivo ```.env.prod```
+4. Llenar las variables de entorno de prod
+5. Crear la nueva imagen
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+6. Volver a levantar el servicio en caso de borrar la image, esto aplica despues de haber creado la imagen por primera ves, la diferencia es omitiendo el build y agregar la instruccion -d para omitir la consola se sincronice con el servicio y este mostradno las tareas del servicio
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up -d
+```
