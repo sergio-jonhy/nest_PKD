@@ -13,7 +13,7 @@ import { SeedModule } from './seed/seed.module';
 
         ServeStaticModule.forRoot({rootPath: join(__dirname,'..','public'),}),
         
-        MongooseModule.forRoot('mongodb://localhost:27017/nest-pokemon'),
+        MongooseModule.forRoot(process.env.MONGODB ||'mongodb://localhost:27017/nest-pokemon'),
 
         PokemonModule,
 
@@ -24,6 +24,6 @@ import { SeedModule } from './seed/seed.module';
 })
 export class AppModule { 
     constructor(){
-        console.log(process.env)
+        console.log(process.env, process.env.MONGODB)
     }
 }
