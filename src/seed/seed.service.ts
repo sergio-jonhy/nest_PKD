@@ -16,7 +16,7 @@ export class SeedService {
 
     async executedSeed() {
         await this.pokemonModel.deleteMany({});
-        const data = await this.http.get<PokeResponse>('https://pokeapi.co/api/v2/pokemon?limit=500');
+        const data = await this.http.get<PokeResponse>('https://pokeapi.co/api/v2/pokemon?limit=50');
         const pokemonToInsert: { name: string, no: number }[] = [];
         // data.results.forEach(async ({ name, url }) => {
         //     const segments = url.split('/');
