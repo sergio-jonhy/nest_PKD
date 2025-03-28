@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, InternalServerErrorException, NotFound
 import { InjectModel } from '@nestjs/mongoose';
 import { Pokemon } from './entities/pokemon.entity';
 import { isValidObjectId, Model } from 'mongoose';
+import { ConfigService } from '@nestjs/config';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
@@ -9,10 +10,17 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 @Injectable()
 export class PokemonService {
 
+    // private defaultLimit: number; se dejo como any porque el error con number indica que no se podia asignar un undefined
+    private defaultLimit: any;
+    
     constructor(
         @InjectModel(Pokemon.name)
         private readonly pokemonModel: Model<Pokemon>,
-    ) { }
+        private readonly configService: ConfigService,
+    ) {
+        this.defaultLimit = this.configService.get<number>('defaultLimit');
+        // console.log(configService.get<number>('defaultLimit'))
+     }
 
     async create(createPokemonDto: CreatePokemonDto) {
         createPokemonDto.name = createPokemonDto.name.toLocaleLowerCase();
@@ -25,7 +33,8 @@ export class PokemonService {
     }
 
     findAll(paginationDto: PaginationDto) {
-        const { limit = 10, offset = 0 } = paginationDto;
+        console.log(this.defaultLimit)
+        const { limit = this.defaultLimit, offset = 0 } = paginationDto;
         return this.pokemonModel.find()
             .sort({
                 no: -1

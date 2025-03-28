@@ -25,8 +25,4 @@ import { EnvConfiguration } from './config/env.config';
         SeedModule
     ]
 })
-export class AppModule { 
-    constructor(){
-        console.log(process.env, process.env.MONGODB)
-    }
-}
+export class AppModule {}
